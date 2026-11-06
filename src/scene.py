@@ -144,8 +144,6 @@ def get_piece(scene: Scene, piece_id: str) -> Piece:
 
 def rotate_piece(scene: Scene, piece_id: str, axis: str, angle: float) -> None:
     """Rotate one piece around its local pivot, preserving its 3D geometry."""
-    if piece_id not in {"T", "L_nonplanar"}:
-        raise ValueError("the preview rotation is restricted to T and L_nonplanar")
     if axis not in {"x", "y", "z"}:
         raise ValueError("axis must be x, y, or z")
     if not np.isfinite(angle):
@@ -159,8 +157,6 @@ def rotate_piece(scene: Scene, piece_id: str, axis: str, angle: float) -> None:
 
 def reset_piece(scene: Scene, piece_id: str) -> None:
     """Restore one piece to its initial 3D pose."""
-    if piece_id not in {"T", "L_nonplanar"}:
-        raise ValueError("the preview reset is restricted to T and L_nonplanar")
     piece = get_piece(scene, piece_id)
     piece.pose = replace(
         piece.pose,
